@@ -188,3 +188,78 @@ else {
 //    flush_rewrite_rules();
 //}
 //register_activation_hook( __FILE__, 'pluginprefix_install' );
+
+function form_creation(){
+    ?>
+<form>
+    First name: <input type="text" name="firstname"><br>
+    Last name:  <input type="text" name="lastname"><br>
+    Message:    <textarea name="message"> Enter text here...</textarea>
+</form>
+    <?php
+}
+add_shortcode('test', 'form_creation');
+
+
+// Example 2 : WP Shortcode to display text on page or post.
+function wp_first_shortcode(){
+    echo "Hello, This is your another shortcode!";
+}
+add_shortcode('first', 'wp_first_shortcode');
+
+
+// Example 3 : WP Shortcode to share post or page on Twitter.
+function ink_wp_shortcode($atts, $content=null)
+{
+    $post_url = get_permalink($post->ID);
+    $post_title = get_the_title($post->ID);
+    $tweet = '<a style="color:blue; font-size: 20px;" href="http://twitter.com/home/?status=Read' . $post_title . 'at' . $post_url . '">
+    <b>Share on Twitter </b></a>';
+    return $tweet;
+}
+add_shortcode('twitter', 'ink_wp_shortcode');
+
+function drop_downs_grafica1()
+{
+    ?>
+<form>
+<select>
+    <option value="0">cero</option>
+    <option value="1">uno</option>
+    <option value="2">dos</option>
+    <option value="3">tres</option>
+</select>
+</form>
+    <?php
+}
+
+add_shortcode('dropdownsgraf1', 'drop_downs_grafica1');
+
+/*****agregar un buen shortcode funcional *****/
+
+function dwwp_ejemplo_shortcode ($atts, $content = NULL)
+{
+    $pairs = array(
+            'title' =>  'Titulo por default'
+        ,   'src'   =>  'www.google.com'
+    );
+    $atts = shortcode_atts($pairs, $atts);
+    
+    return '<h1>'.$atts['title'].'</h1>';
+}
+
+add_shortcode('ejemplo_shortcode', 'dwwp_ejemplo_shortcode');
+
+function dwwp_ejemplo_shortcode1 ($atts, $content = NULL)
+{
+    $pairs = array(
+            'title' =>  'Titulo por default'
+    );
+    $atts = shortcode_atts($pairs, $atts);
+    
+    $location = get_terms('location');
+    var_dump($location);
+    die;
+}
+
+add_shortcode('ejemplo_shortcode2', 'dwwp_ejemplo_shortcode1');
