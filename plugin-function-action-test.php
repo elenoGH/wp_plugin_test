@@ -263,3 +263,5 @@ function dwwp_ejemplo_shortcode1 ($atts, $content = NULL)
 }
 
 add_shortcode('ejemplo_shortcode2', 'dwwp_ejemplo_shortcode1');
+
+//hola test
